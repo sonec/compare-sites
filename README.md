@@ -5,6 +5,7 @@ Tool based on playright which visually compare two sites
 
 ```
 npm install
+npx playwright install
 ```
 # Configuration
 
