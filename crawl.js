@@ -4,6 +4,7 @@ const playwright = require('playwright');
   const browser = await playwright.chromium.launch()
   const page = await browser.newPage()
   const seenURLs = new Set()
+  let found = {}
   const crawl = async (url, home) => {
     if (seenURLs.has(url)) {
       return
@@ -12,7 +13,12 @@ const playwright = require('playwright');
     if (!url.startsWith(home)) {
       return
     }
-    console.log(`Visiting ${url}`)
+    let path = new URL(url).pathname
+    let key = path.replace(/\//g, '_')
+    if(!found[key]){
+        found[key] = path
+        console.log(`\t"${key}":"${path}"`);
+    }
     await page.goto(url)
     await page.waitForSelector('body')
     const urls = await page.$$eval('a', (elements) =>
@@ -22,9 +28,10 @@ const playwright = require('playwright');
       await crawl(u, home)
     }
   }
-  let start = 'https://www.example.com'
+  let start = 'https://www.google.com'
   let base = start
+  console.log("{")
   await crawl(start,base)
-  console.log(seenURLs)
+  console.log("}")
   await browser.close()
 })()
