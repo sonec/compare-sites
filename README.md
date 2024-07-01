@@ -14,17 +14,17 @@ The configs directory contains three files:
 * domains.json - This contains the domains of the two sites be compared
 * paths.json - This contains the paths of all the pages that are to be compared and their user specified names
 
-# Usage
+# Usage for one domains
+
+This will take a screenshot of a website and attach it to each test for review in the html reporter
 
 ```
 npx playwright test --reporter html
 ```
 
-# Notes
+# Usage for two domains
 
-I've also created a custom html reporter based off the existing default html reporter. This reporter only displays the screenshot section when looking at each failed test, it doesn't show where the test failed.
-
-To run:
+I've created a custom html reporter based off the existing default html reporter. This reporter only displays the screenshot section when looking at each failed test, it doesn't show where the test failed.
 
 ```
 npx playwright test --reporter "./reporter/custom-reporter.js"
