@@ -16,10 +16,11 @@ The configs directory contains three files:
 
 # Usage for one domains
 
-This will take a screenshot of a website and attach it to each test for review in the html reporter
+This will take cross browser screenshots of the first website in domains.json and attach it to each test for review in the html reporter
 
 ```
-npx playwright test --reporter html
+npx playwright test cross_browser.spec.ts --reporter html
+npx playwright show-report
 ```
 
 # Usage for two domains
@@ -27,5 +28,11 @@ npx playwright test --reporter html
 I've created a custom html reporter based off the existing default html reporter. This reporter only displays the screenshot section when looking at each failed test, it doesn't show where the test failed.
 
 ```
-npx playwright test --reporter "./reporter/custom-reporter.js"
+npx playwright test css_regression.spec.ts --reporter="./reporter/custom-reporter.js"
+```
+If there are issues the report will be loaded up in the browser automatically.
+
+Otherwise, you'll need to run the command
+```
+npx playwright show-report
 ```
